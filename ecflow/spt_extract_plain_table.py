@@ -109,9 +109,9 @@ def extract_summary_table(workspace):
             # in the gaps.
             for index, comid in enumerate(comids):
                 if 'max' in ncfile:
-                    maxlist.append(res.variables['Qout'][index, :].tolist())
+                    maxlist.append(res.variables['Qout'][index, :].round(2).tolist())
                 elif 'avg' in ncfile:
-                    meanlist.append(res.variables['Qout'][index, :].tolist())
+                    meanlist.append(res.variables['Qout'][index, :].round(2).tolist())
         # loops through the lists of max lists and mean lists to interpolate using the dates as x values
 
         columns = ['comid', 'timestamp', 'max', 'mean', 'color', 'thickness', 'ret_per']
@@ -178,8 +178,8 @@ def extract_summary_table(workspace):
                 data={
                     columns[0]: pd.Series([comid for comid in range(len(new_dates))]),
                     columns[1]: pd.Series(new_dates),
-                    columns[2]: pd.Series(int_max),
-                    columns[3]: pd.Series(int_mean),
+                    columns[2]: pd.Series(int_max).round(2),
+                    columns[3]: pd.Series(int_mean).round(2),
                     columns[4]: pd.Series(colors),
                     columns[5]: pd.Series(thicknesses),
                     columns[6]: pd.Series(ret_pers)
